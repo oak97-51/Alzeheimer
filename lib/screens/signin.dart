@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:Alzeheimer/data/model_user.dart';
-import 'package:Alzeheimer/screens/home.dart';
+// import 'package:Alzeheimer/screens/home.dart';
+import 'package:Alzeheimer/screens/home2.dart';
 import 'package:Alzeheimer/screens/signup.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:Alzeheimer/utility/normal_dialog.dart';
@@ -15,7 +16,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String email,password;
+  String email, password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +40,7 @@ class _SignInState extends State<SignIn> {
       )),
     );
   }
+
   Container mainBorder(BuildContext context) {
     return Container(
       decoration: new BoxDecoration(
@@ -73,10 +75,11 @@ class _SignInState extends State<SignIn> {
           Text(
             'ยังไม่ได้เป็นสมาชิก?     ',
             style: TextStyle(
-                fontSize: 16.0,
-                color: MyStyle().mainColor,
-                fontWeight: FontWeight.normal,
-                fontFamily: 'BaiJamjuree',),
+              fontSize: 16.0,
+              color: MyStyle().mainColor,
+              fontWeight: FontWeight.normal,
+              fontFamily: 'BaiJamjuree',
+            ),
           ),
           InkWell(
             onTap: () {
@@ -98,20 +101,22 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Future<Null> checkAuthen() async{
-    String url = 'http://restaurant2019.com/htdocs/checkAuthen.php?isAdd=true&Email=$email';
+  Future<Null> checkAuthen() async {
+    String url =
+        'http://restaurant2019.com/htdocs/checkAuthen.php?isAdd=true&Email=$email';
     try {
       Response response = await Dio().get(url);
       print('res = $response');
 
-      var result = json.decode(response.data);//ตัวแปร var คือไม่รู้ว่าได้ค่ามาเป็นอะไร
+      var result =
+          json.decode(response.data); //ตัวแปร var คือไม่รู้ว่าได้ค่ามาเป็นอะไร
       print('result = $result');
 
-      for(var map in result){
+      for (var map in result) {
         UserModel userModel = UserModel.fromJson(map);
         print("error");
         if (password == userModel.password) {
-          routeToService(Home(),userModel);
+          routeToService(Home2(), userModel);
           // String chooseType = userModel.chooseType;
           //   if(chooseType == 'User'){
           //     routeToService(MainUser(),userModel);
@@ -122,57 +127,65 @@ class _SignInState extends State<SignIn> {
           //   }else{
           //     normalDialog(context,'ข้อมูลของท่านไม่ตรงกับที่สมัคร');
           //   }
-        }else{
-          normalDialog(context,'Password ผิด กรอกใหม่อีกครั้ง');
+        } else {
+          normalDialog(context, 'Password ผิด กรอกใหม่อีกครั้ง');
         }
       }
     } catch (e) {
       print('error');
-      normalDialog(context,'Email หรือ Password ผิด กรุณากรอกใหม่อีกครั้ง');
+      normalDialog(context, 'Email หรือ Password ผิด กรุณากรอกใหม่อีกครั้ง');
     }
   }
 
   Future<Null> routeToService(Widget myWidget, UserModel userModel) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('id',userModel.adminId);
-    preferences.setString('Email',userModel.email);
-    preferences.setString('LastName',userModel.lastName);
-    preferences.setString('FirstName',userModel.firstName);
+    preferences.setString('id', userModel.adminId);
+    preferences.setString('Email', userModel.email);
+    preferences.setString('LastName', userModel.lastName);
+    preferences.setString('FirstName', userModel.firstName);
 
-    MaterialPageRoute route = MaterialPageRoute (builder: (context) => myWidget,);
-    Navigator.pushAndRemoveUntil(context,route,(route)=>false);
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => myWidget,
+    );
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 
   Widget userForm() => Container(
       width: 340.0,
       height: 48.0,
       child: TextField(
-        onChanged: (value) => email = value.trim(),
+          onChanged: (value) => email = value.trim(),
           decoration: InputDecoration(
-        //prefixIcon: Icon(Icons.account_box, color: MyStyle().darkColor),
-        labelStyle: TextStyle(color: Color(0xFF6D7278),fontFamily: 'BaiJamjuree',),
-        labelText: 'อีเมล',
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: MyStyle().darkColor)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: MyStyle().primaryColor)),
-      )));
+            //prefixIcon: Icon(Icons.account_box, color: MyStyle().darkColor),
+            labelStyle: TextStyle(
+              color: Color(0xFF6D7278),
+              fontFamily: 'BaiJamjuree',
+            ),
+            labelText: 'อีเมล',
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyStyle().darkColor)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyStyle().primaryColor)),
+          )));
 
   Widget passwordForm() => Container(
       width: 340.0,
       height: 48.0,
       child: TextField(
-        onChanged: (value) => password = value.trim(),
-        obscureText: true, // ทำ password เป็น ****
-        decoration: InputDecoration(
-        //prefixIcon: Icon(Icons.lock, color: MyStyle().darkColor),
-        labelStyle: TextStyle(color: Color(0xFF6D7278),fontFamily: 'BaiJamjuree',),
-        labelText: 'รหัสผ่าน : ',
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: MyStyle().darkColor)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: MyStyle().primaryColor)),
-      )));
+          onChanged: (value) => password = value.trim(),
+          obscureText: true, // ทำ password เป็น ****
+          decoration: InputDecoration(
+            //prefixIcon: Icon(Icons.lock, color: MyStyle().darkColor),
+            labelStyle: TextStyle(
+              color: Color(0xFF6D7278),
+              fontFamily: 'BaiJamjuree',
+            ),
+            labelText: 'รหัสผ่าน : ',
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyStyle().darkColor)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyStyle().primaryColor)),
+          )));
 
   Widget textWidget(String text) {
     return Container(
@@ -192,21 +205,29 @@ class _SignInState extends State<SignIn> {
         child: RaisedButton(
           color: MyStyle().mainColor,
           onPressed: () {
-            if (email == null || email.isEmpty|| password == null || password.isEmpty) {
-                normalDialog(context,'มีช่องว่างกรุณากรอกให้ครบ');
-              }else{
-                checkAuthen();
-              }
+            if (email == null ||
+                email.isEmpty ||
+                password == null ||
+                password.isEmpty) {
+              normalDialog(context, 'มีช่องว่างกรุณากรอกให้ครบ');
+            } else {
+              checkAuthen();
+            }
             // MaterialPageRoute route = MaterialPageRoute(
             //       builder: (value) => Home()); //วิธีเชื่อมหน้า
             //   Navigator.push(context, route);
           },
           child: Text(
             'เข้าสู่ระบบ',
-            style: TextStyle(color: Colors.white,fontFamily: 'BaiJamjuree',fontSize: 16,fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'BaiJamjuree',
+                fontSize: 16,
+                fontWeight: FontWeight.bold),
           ),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),),
+            borderRadius: BorderRadius.circular(50.0),
+          ),
         ),
       );
 }
