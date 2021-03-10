@@ -77,75 +77,77 @@ class _HomeState extends State<Home> {
         centerTitle: true,
       ),
       drawer: showDrawer(),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            MyStyle().mySizeboxh24(),
-            emergencyCircle(),
-            MyStyle().mySizeboxh24(),
-            Row(
-              children: [
-                Expanded(
-                  child: space(),
-                  flex: 2,
-                ),
-                Column(
-                  children: [
-                    trackingPatient(),
-                    MyStyle().freeSizebox(0, 12),
-                    MyStyle().txt16BoldMain('ติดตามผู้ป่วย'),
-                  ],
-                ),
-                Expanded(
-                  child: space(),
-                  flex: 2,
-                ),
-                Column(
-                  children: [
-                    patientHistory(),
-                    MyStyle().freeSizebox(0, 12),
-                    MyStyle().txt16BoldMain('ประวัติผู้ป่วย'),
-                  ],
-                ),
-                Expanded(
-                  child: space(),
-                  flex: 2,
-                )
-              ],
-            ),
-            MyStyle().mySizeboxh24(),
-            //MyStyle().mySizeboxh24(),
-            Row(
-              children: [
-                Expanded(
-                  child: space(),
-                  flex: 2,
-                ),
-                Column(
-                  children: [
-                    assignActivity(),
-                    MyStyle().freeSizebox(0, 12),
-                    MyStyle().txt16BoldMain('''บันทึกกิจกรรมผู้ป่วย'''),
-                  ],
-                ),
-                Expanded(
-                  child: space(),
-                  flex: 2,
-                ),
-                Column(
-                  children: [
-                    hospitalList(),
-                    MyStyle().freeSizebox(0, 12),
-                    MyStyle().txt16BoldMain('รายชื่อรพ.'),
-                  ],
-                ),
-                Expanded(
-                  child: space(),
-                  flex: 3,
-                )
-              ],
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              MyStyle().mySizeboxh24(),
+              emergencyCircle(),
+              MyStyle().mySizeboxh24(),
+              Row(
+                children: [
+                  Expanded(
+                    child: space(),
+                    flex: 2,
+                  ),
+                  Column(
+                    children: [
+                      trackingPatient(),
+                      MyStyle().freeSizebox(0, 12),
+                      MyStyle().txt16BoldMain('ติดตามผู้ป่วย'),
+                    ],
+                  ),
+                  Expanded(
+                    child: space(),
+                    flex: 2,
+                  ),
+                  Column(
+                    children: [
+                      patientHistory(),
+                      MyStyle().freeSizebox(0, 12),
+                      MyStyle().txt16BoldMain('ประวัติผู้ป่วย'),
+                    ],
+                  ),
+                  Expanded(
+                    child: space(),
+                    flex: 2,
+                  )
+                ],
+              ),
+              MyStyle().mySizeboxh24(),
+              //MyStyle().mySizeboxh24(),
+              Row(
+                children: [
+                  Expanded(
+                    child: space(),
+                    flex: 2,
+                  ),
+                  Column(
+                    children: [
+                      assignActivity(),
+                      MyStyle().freeSizebox(0, 12),
+                      MyStyle().txt16BoldMain('''บันทึกกิจกรรมผู้ป่วย'''),
+                    ],
+                  ),
+                  Expanded(
+                    child: space(),
+                    flex: 2,
+                  ),
+                  Column(
+                    children: [
+                      hospitalList(),
+                      MyStyle().freeSizebox(0, 12),
+                      MyStyle().txt16BoldMain('รายชื่อรพ.'),
+                    ],
+                  ),
+                  Expanded(
+                    child: space(),
+                    flex: 3,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

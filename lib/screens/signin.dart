@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:Alzeheimer/data/model_user.dart';
-// import 'package:Alzeheimer/screens/home.dart';
+import 'package:Alzeheimer/screens/home.dart';
 import 'package:Alzeheimer/screens/home2.dart';
 import 'package:Alzeheimer/screens/signup.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
@@ -116,7 +116,7 @@ class _SignInState extends State<SignIn> {
         UserModel userModel = UserModel.fromJson(map);
         print("error");
         if (password == userModel.password) {
-          routeToService(Home2(), userModel);
+          routeToService(Home(), userModel);
           // String chooseType = userModel.chooseType;
           //   if(chooseType == 'User'){
           //     routeToService(MainUser(),userModel);
