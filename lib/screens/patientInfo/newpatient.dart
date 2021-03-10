@@ -71,141 +71,152 @@ class _NewPatientState extends State<NewPatient> {
         backgroundColor: MyStyle().mainColor,
         centerTitle: true,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              //height: screenHeight,
-              height: MediaQuery.of(context).size.height * 0.75,
-              width: MediaQuery.of(context).size.width * 0.9,
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
-              decoration: new BoxDecoration(
-                color: Colors.white,
-                borderRadius: new BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
-              ),
-
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    MyStyle().mySizebox(),
-                    MyStyle().txt20RegularB('ข้อมูลผู้ป่วย'),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ชื่อ'),
-                    nameForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('นามสกุล'),
-                    surnameForm(),
-                    MyStyle().mySizebox(),
-                    Row(
-                      children: [
-                        genderManRadio(),
-                        genderWomanRadio(),
-                      ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Container(
+                //height: screenHeight,
+                height: MediaQuery.of(context).size.height * 0.75,
+                width: MediaQuery.of(context).size.width * 0.9,
+                margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
                     ),
-                    textSubtitle('เลขบัตรประชาชน'),
-                    identityForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('วัน / เดือน / ปี ที่เกิด'),
-                    dateOfBirthForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('อายุ'),
-                    ageForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('โรคประจำตัว'),
-                    diseaseForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('อาชีพ'),
-                    careerForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('สัญชาติ'),
-                    nationalityForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ศาสนา'),
-                    religionForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('หมุ่เลือด'),
-                    bloodGroupForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ที่อยู่'),
-                    addressForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('เบอร์โทรศัพท์'),
-                    telForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ชื่อ - นามสกุล บิดา'),
-                    nameDadForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ชื่อ - นามสกุล มารดา'),
-                    nameMomForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ผู้ติดติดได้ในกรณีฉุกเฉิน'),
-                    emergencyContactForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ที่อยู่ผู้ติดต่อได้'),
-                    emergencyAddressForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('เบอร์โทรศัพท์ผู้ติดต่อได้กรณีฉุกเฉิน'),
-                    emergencyTelForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ผู้ติดต่อได้เกี่ยวข้องเป็น'),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            dadRadio(),
-                            momRadio(),
-                            childRadio(),
-                            wifeRadio(),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            husbandRadio(),
-                            relativeRadio(),
-                            parentRadio(),
-                            bossRadio(),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            friendRadio(),
-                            etcRadio(),
-                          ],
-                        ),
-                      ],
-                    ),
-                    etcForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('ประวัติแพ้ยา'),
-                    drugAllergyForm(),
-                    MyStyle().mySizebox(),
-                    textSubtitle('รูปภาพ'),
-                    groupImage(),
-                    MyStyle().mySizebox(),
-                    textPhoto(),
-                    MyStyle().mySizebox(),
                   ],
                 ),
+
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      MyStyle().mySizebox(),
+                      MyStyle().txt20RegularB('ข้อมูลผู้ป่วย'),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ชื่อ'),
+                      nameForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('นามสกุล'),
+                      surnameForm(),
+                      MyStyle().mySizebox(),
+                      Row(
+                        children: [
+                          genderManRadio(),
+                          genderWomanRadio(),
+                        ],
+                      ),
+                      textSubtitle('เลขบัตรประชาชน'),
+                      identityForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('วัน / เดือน / ปี ที่เกิด'),
+                      dateOfBirthForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('อายุ'),
+                      ageForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('โรคประจำตัว'),
+                      diseaseForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('อาชีพ'),
+                      careerForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('สัญชาติ'),
+                      nationalityForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ศาสนา'),
+                      religionForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('หมุ่เลือด'),
+                      bloodGroupForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ที่อยู่'),
+                      addressForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('เบอร์โทรศัพท์'),
+                      telForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ชื่อ - นามสกุล บิดา'),
+                      nameDadForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ชื่อ - นามสกุล มารดา'),
+                      nameMomForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ผู้ติดติดได้ในกรณีฉุกเฉิน'),
+                      emergencyContactForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ที่อยู่ผู้ติดต่อได้'),
+                      emergencyAddressForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('เบอร์โทรศัพท์ผู้ติดต่อได้กรณีฉุกเฉิน'),
+                      emergencyTelForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ผู้ติดต่อได้เกี่ยวข้องเป็น'),
+                      Column(
+                        children: [
+                          SingleChildScrollView(
+                            child: Row(
+                              children: [
+                                dadRadio(),
+                                momRadio(),
+                                childRadio(),
+                                wifeRadio(),
+                              ],
+                            ),
+                          ),
+                          Wrap(
+                            spacing: 1.0, // gap between adjacent chips
+                            runSpacing: 1.0, // gap between lines
+                            direction: Axis.horizontal,
+                            children: <Widget>[
+                              Row(
+                                children: [
+                                  husbandRadio(),
+                                  relativeRadio(),
+                                  parentRadio(),
+                                  bossRadio(),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              friendRadio(),
+                              etcRadio(),
+                            ],
+                          ),
+                        ],
+                      ),
+                      etcForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('ประวัติแพ้ยา'),
+                      drugAllergyForm(),
+                      MyStyle().mySizebox(),
+                      textSubtitle('รูปภาพ'),
+                      groupImage(),
+                      MyStyle().mySizebox(),
+                      textPhoto(),
+                      MyStyle().mySizebox(),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            MyStyle().mySizebox(),
-            Row(
-              children: [
-                MyStyle().mySizeboxw24(),
-                backButton(),
-                MyStyle().mySizeboxw24(),
-                registerButton(),
-              ],
-            ),
-            MyStyle().mySizebox(),
-          ],
+              MyStyle().mySizebox(),
+              Row(
+                children: [
+                  MyStyle().mySizeboxw24(),
+                  backButton(),
+                  MyStyle().mySizeboxw24(),
+                  registerButton(),
+                ],
+              ),
+              MyStyle().mySizebox(),
+            ],
+          ),
         ),
       ),
     );
@@ -235,7 +246,7 @@ class _NewPatientState extends State<NewPatient> {
   }
 
   Widget takePhotoButton() => Container(
-        width: 120.0,
+        width: MediaQuery.of(context).size.width * 0.4,
         height: 36.0,
         //padding: EdgeInsets.only(left:20),
         child: RaisedButton(
@@ -256,7 +267,7 @@ class _NewPatientState extends State<NewPatient> {
       );
 
   Widget choosePhotoButton() => Container(
-        width: 120.0,
+        width: MediaQuery.of(context).size.width * 0.4,
         height: 36.0,
         //padding: EdgeInsets.only(left:20),
         child: RaisedButton(
@@ -299,7 +310,7 @@ class _NewPatientState extends State<NewPatient> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            width: 100,
+            //width: 100,
             child: Row(
               //setstate ถ้าเลือกแล้วจะวาด state ใหม่ state จะถูกวาดขึ้นมาครั้งเดียวตอนแรก
               children: <Widget>[
@@ -326,7 +337,7 @@ class _NewPatientState extends State<NewPatient> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            width: 250.0,
+            // width: 250.0,
             child: Row(
               //setstate ถ้าเลือกแล้วจะวาด state ใหม่ state จะถูกวาดขึ้นมาครั้งเดียวตอนแรก
               children: <Widget>[
@@ -641,7 +652,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => firstName = value.trim(),
@@ -666,7 +677,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => lastName = value.trim(),
@@ -696,7 +707,7 @@ class _NewPatientState extends State<NewPatient> {
   }
 
   Widget backButton() => Container(
-        width: 170.0,
+        width: MediaQuery.of(context).size.width * 0.4,
         height: 48.0,
         child: RaisedButton(
           color: Colors.white,
@@ -718,7 +729,7 @@ class _NewPatientState extends State<NewPatient> {
       );
 
   Widget registerButton() => Container(
-        width: 170.0,
+        width: MediaQuery.of(context).size.width * 0.4,
         height: 48.0,
         child: RaisedButton(
             shape: RoundedRectangleBorder(
@@ -771,7 +782,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => identity = value.trim(),
@@ -796,7 +807,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => dateOfBirth = value.trim(),
@@ -821,7 +832,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => age = value.trim(),
@@ -846,7 +857,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => disease = value.trim(),
@@ -871,7 +882,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => career = value.trim(),
@@ -896,7 +907,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => nationality = value.trim(),
@@ -921,7 +932,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => religion = value.trim(),
@@ -946,7 +957,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => bloodGroup = value.trim(),
@@ -971,7 +982,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => address = value.trim(),
@@ -996,7 +1007,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => tel = value.trim(),
@@ -1021,7 +1032,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => nameOfDad = value.trim(),
@@ -1046,7 +1057,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => nameOfMom = value.trim(),
@@ -1071,7 +1082,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => nameEmergency = value.trim(),
@@ -1096,7 +1107,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => addressEmergency = value.trim(),
@@ -1121,7 +1132,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => telEmergency = value.trim(),
@@ -1146,7 +1157,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => etc = value.trim(),
@@ -1171,7 +1182,7 @@ class _NewPatientState extends State<NewPatient> {
         children: [
           Container(
               //margin: const EdgeInsets.only(),
-              width: 340.0,
+              width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
                   onChanged: (value) => historyAllergy = value.trim(),

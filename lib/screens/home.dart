@@ -16,6 +16,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import 'assignActivity/patientList.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -233,22 +235,29 @@ class _HomeState extends State<Home> {
   }
 
   Widget assignActivity() {
-    return Container(
-      //margin: const EdgeInsets.only(left: 65, right: 65),
-      width: 106,
-      height: 101,
-      child: new Center(
-        widthFactor: 58,
-        heightFactor: 64,
-        child: new Image.asset(
-          'images/assignActivity.png',
-          width: 58,
-          height: 64,
+    return GestureDetector(
+      onTap: (){
+        MaterialPageRoute route = MaterialPageRoute(
+            builder: (value) => PatientList()); //วิธีเชื่อมหน้า
+        Navigator.push(context, route);
+      },
+      child: Container(
+        //margin: const EdgeInsets.only(left: 65, right: 65),
+        width: 106,
+        height: 101,
+        child: new Center(
+          widthFactor: 58,
+          heightFactor: 64,
+          child: new Image.asset(
+            'images/assignActivity.png',
+            width: 58,
+            height: 64,
+          ),
         ),
-      ),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.circular(35.0),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.circular(35.0),
+        ),
       ),
     );
   }
@@ -321,18 +330,18 @@ class _HomeState extends State<Home> {
                       'Username : $nameUser',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20.0,
+                          fontSize: 16.0,
                           fontFamily: 'Prompt'),
                     ),
                   ),
                   Align(
-                    heightFactor: 1.5,
+                    heightFactor: MediaQuery.of(context).size.height * 0.0019,
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Email: $email',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20.0,
+                          fontSize: 14.0,
                           fontFamily: 'Prompt'),
                     ),
                   ),

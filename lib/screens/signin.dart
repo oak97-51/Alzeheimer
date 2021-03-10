@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
           Text(
             'ยังไม่ได้เป็นสมาชิก?     ',
             style: TextStyle(
-              fontSize: 16.0,
+              fontSize: 14.0,
               color: MyStyle().mainColor,
               fontWeight: FontWeight.normal,
               fontFamily: 'BaiJamjuree',
@@ -92,7 +92,7 @@ class _SignInState extends State<SignIn> {
                 style: TextStyle(
                   color: MyStyle().mainColor,
                   decoration: TextDecoration.underline,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontFamily: 'BaiJamjuree',
                 )),
           )
@@ -151,7 +151,7 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget userForm() => Container(
-      width: 340.0,
+      width: MediaQuery.of(context).size.width * 0.85,
       height: 48.0,
       child: TextField(
           onChanged: (value) => email = value.trim(),
@@ -169,7 +169,7 @@ class _SignInState extends State<SignIn> {
           )));
 
   Widget passwordForm() => Container(
-      width: 340.0,
+      width: MediaQuery.of(context).size.width * 0.85,
       height: 48.0,
       child: TextField(
           onChanged: (value) => password = value.trim(),
@@ -200,7 +200,7 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget loginButton() => Container(
-        width: 340.0,
+        width: MediaQuery.of(context).size.width * 0.8,
         height: 48.0,
         child: RaisedButton(
           color: MyStyle().mainColor,

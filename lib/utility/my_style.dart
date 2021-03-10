@@ -11,8 +11,8 @@ class MyStyle{
   SizedBox mySizeboxh24() => SizedBox(width: 8.0,height: 24.0,);
   SizedBox freeSizebox(double w,double h) => SizedBox(width: w,height: h,);
 
-  Text showTitle(String title) => Text(title,style: TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold),);
-  Text showSubtitle(String subtitle) => Text(subtitle,style: TextStyle(fontSize: 20.0,color: Colors.white70,fontWeight: FontWeight.normal,fontFamily: 'BaiJamjuree'),);
+  Text showTitle(String title) => Text(title,style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.bold),);
+  Text showSubtitle(String subtitle) => Text(subtitle,style: TextStyle(fontSize: 16.0,color: Colors.white70,fontWeight: FontWeight.normal,fontFamily: 'BaiJamjuree'),);
   Text showSubtitle2(String subtitle) => Text(subtitle,style: TextStyle(fontSize: 16.0,color: mainColor,fontWeight: FontWeight.normal,fontFamily: 'BaiJamjuree'),);
   Text txt16Bold(String subtitle) => Text(subtitle,style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'BaiJamjuree'),);
   Text txt20RegularB(String subtitle) => Text(subtitle,style: TextStyle(fontSize: 20.0,color: Colors.black,fontWeight: FontWeight.normal,fontFamily: 'BaiJamjuree'),);
