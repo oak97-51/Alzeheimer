@@ -484,7 +484,7 @@ class _PatientInfoState extends State<PatientInfo> {
           Container(),
           Text(
             'ชื่อ : ${patientModels[index].name}',
-            style: TextStyle(fontSize: 20, color: Colors.lightBlueAccent),
+            style: TextStyle(fontSize: 16, color: Colors.lightBlueAccent),
             //textAlign: TextAlign.left,
           ),
           Text(

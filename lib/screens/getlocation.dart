@@ -19,7 +19,8 @@ class _MyLocationState extends State<MyLocation> {
   Location location = Location();
 
   GoogleMapController _controller;
-  LatLng _initialcameraposition = LatLng(0.5937, 0.9629);
+  // LatLng _initialcameraposition = LatLng(0.5937, 0.9629);
+  LatLng _initialcameraposition = LatLng(13.6312901, 100.4622902);
 
   @override
   void initState() {
