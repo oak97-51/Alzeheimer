@@ -11,21 +11,25 @@ class UserModel {
   String bloodType;
   String address;
   String img;
+  String idp;
+  String status;
 
-  UserModel(
-      {this.adminId,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.password,
-      this.confirmPassword,
-      this.gender,
-      this.dateOfBirth,
-      this.department,
-      this.bloodType,
-      this.address,
-      this.img,
-      });
+  UserModel({
+    this.adminId,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.confirmPassword,
+    this.gender,
+    this.dateOfBirth,
+    this.department,
+    this.bloodType,
+    this.address,
+    this.img,
+    this.idp,
+    this.status,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     adminId = json['Admin_Id'];
@@ -40,6 +44,8 @@ class UserModel {
     bloodType = json['BloodType'];
     address = json['Address'];
     img = json['Img'];
+    idp = json['idp'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -56,7 +62,8 @@ class UserModel {
     data['BloodType'] = this.bloodType;
     data['Address'] = this.address;
     data['Img'] = this.img;
+    data['idp'] = this.idp;
+    data['status'] = this.status;
     return data;
   }
 }
-

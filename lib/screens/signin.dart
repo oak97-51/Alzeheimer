@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:Alzeheimer/data/model_user.dart';
 import 'package:Alzeheimer/screens/home.dart';
 import 'package:Alzeheimer/screens/home2.dart';
+// import 'package:Alzeheimer/screens/home2.dart';
 import 'package:Alzeheimer/screens/signup.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:Alzeheimer/utility/normal_dialog.dart';
@@ -10,13 +10,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//sign in 2
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
-  String email, password;
+  String email, password, status;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,7 @@ class _SignInState extends State<SignIn> {
         color: Colors.white,
         borderRadius: new BorderRadius.circular(10.0),
       ),
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         children: [
@@ -114,9 +115,18 @@ class _SignInState extends State<SignIn> {
 
       for (var map in result) {
         UserModel userModel = UserModel.fromJson(map);
-        print("error");
+
+        // print("error : ${userModel.firstName}");
+        // print("address: ${userModel.address}");
+        // print("status: ${userModel.status}");
+
         if (password == userModel.password) {
-          routeToService(Home(), userModel);
+          if (userModel.status == 'ผู้ป่วย') {
+            routeToService(Home2(), userModel);
+          } else {
+            routeToService(Home(), userModel);
+          }
+
           // String chooseType = userModel.chooseType;
           //   if(chooseType == 'User'){
           //     routeToService(MainUser(),userModel);
@@ -143,6 +153,8 @@ class _SignInState extends State<SignIn> {
     preferences.setString('Email', userModel.email);
     preferences.setString('LastName', userModel.lastName);
     preferences.setString('FirstName', userModel.firstName);
+    preferences.setString('status', userModel.status);
+    preferences.setString('idp', userModel.idp);
 
     MaterialPageRoute route = MaterialPageRoute(
       builder: (context) => myWidget,

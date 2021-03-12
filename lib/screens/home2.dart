@@ -1,7 +1,9 @@
+import 'package:Alzeheimer/data/model_user.dart';
 import 'package:Alzeheimer/screens/adminInfo.dart';
-import 'package:Alzeheimer/screens/getgps.dart';
+// import 'package:Alzeheimer/screens/getgps.dart';
 import 'package:Alzeheimer/screens/patientInfo/patientInfo.dart';
 import 'package:Alzeheimer/screens/patientapp/about.dart';
+import 'package:Alzeheimer/screens/patientapp/detail2.dart';
 import 'package:Alzeheimer/screens/patientapp/getgps2.dart';
 import 'package:Alzeheimer/screens/signUp.dart';
 import 'package:Alzeheimer/screens/signin.dart';
@@ -29,7 +31,9 @@ class _Home2State extends State<Home2> {
       bloodType,
       address,
       email,
-      img;
+      img,
+      status,
+      idp;
   //1080 x 1920 420dpi
 
   @override
@@ -58,9 +62,13 @@ class _Home2State extends State<Home2> {
       address = preferences.getString('Address');
       img = preferences.getString('Img');
       email = preferences.getString('Email');
+      status = preferences.getString('status');
+      idp = preferences.getString('idp');
       print('Nameuser = $nameUser');
       print('Nameuser = $nameUser2');
       print('Gender = $gender');
+      print('idp = $idp');
+      print('status = $status');
     });
   }
 
@@ -178,23 +186,32 @@ class _Home2State extends State<Home2> {
   }
 
   Widget trackingPatient() {
-    return Container(
-      //margin: const EdgeInsets.only(left: 65, right: 65),
-      height: 106.0,
-      width: 101.0,
-      child: new Center(
-        widthFactor: 58,
-        heightFactor: 64,
-        child: new Image.asset(
-          'images/patientapp-person.png',
-          width: 58,
-          height: 64,
+    return GestureDetector(
+      child: Container(
+        //margin: const EdgeInsets.only(left: 65, right: 65),
+        height: 106.0,
+        width: 101.0,
+        child: new Center(
+          widthFactor: 58,
+          heightFactor: 64,
+          child: new Image.asset(
+            'images/patientapp-person.png',
+            width: 58,
+            height: 64,
+          ),
+        ),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.circular(35.0),
         ),
       ),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.circular(35.0),
-      ),
+      onTap: () {
+        MaterialPageRoute route = MaterialPageRoute(
+            builder: (value) => Detail2(
+                  paramId: idp,
+                )); //วิธีเชื่อมหน้า
+        Navigator.push(context, route);
+      },
     );
   }
 
@@ -380,16 +397,18 @@ class _Home2State extends State<Home2> {
         Navigator.push(context, route);
       });
 
-  // Future<Null> routeToService(Widget myWidget, UserModel userModel) async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   preferences.setString('LastName',userModel.lastName);
-  //   preferences.setString('FirstName',userModel.firstName);
-  //   preferences.setString('Department',userModel.department);
-  //   preferences.setString('DateOfBirth',userModel.dateOfBirth);
-  //   preferences.setString('Gender',userModel.gender);
-  //   preferences.setString('BloodType',userModel.bloodType);
-  //   preferences.setString('Address',userModel.address);
-  // }
+  Future<Null> routeToService(Widget myWidget, UserModel userModel) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('LastName', userModel.lastName);
+    preferences.setString('FirstName', userModel.firstName);
+    preferences.setString('Department', userModel.department);
+    preferences.setString('DateOfBirth', userModel.dateOfBirth);
+    preferences.setString('Gender', userModel.gender);
+    preferences.setString('BloodType', userModel.bloodType);
+    preferences.setString('Address', userModel.address);
+    preferences.setString('status', userModel.status);
+    preferences.setString('idp', userModel.idp);
+  }
 
   //   MaterialPageRoute route = MaterialPageRoute (builder: (context) => myWidget,);
   //   Navigator.pushAndRemoveUntil(context,route,(route)=>false);

@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                       groupImage(),
                       MyStyle().mySizebox(),
                       textPhoto(),
-                       MyStyle().mySizebox(),
+                      MyStyle().mySizebox(),
                     ],
                   ),
                 ),
@@ -131,7 +131,9 @@ class _SignUpState extends State<SignUp> {
       children: <Widget>[
         Container(
           width: 250.0,
-          child: file == null ?Image.asset('images/middle_age_man.png'): Image.file(file),
+          child: file == null
+              ? Image.asset('images/middle_age_man.png')
+              : Image.file(file),
         ),
         MyStyle().freeSizebox(20, 20),
         Row(
@@ -558,7 +560,7 @@ class _SignUpState extends State<SignUp> {
                 normalDialog(context, 'โปรดเลือกชนิดของผู้สมัคร');
               } else {
                 registerThread();
-                backDialog(context,'ลงทะเบียนสำเร็จ',SignIn());
+                backDialog(context, 'ลงทะเบียนสำเร็จ', SignIn());
                 // normalDialog(context, 'ลงทะเบียนสำเร็จ');
                 // MaterialPageRoute route = MaterialPageRoute(
                 //     builder: (value) => SignIn()); //วิธีเชื่อมหน้า

@@ -35,7 +35,8 @@ class _HomeState extends State<Home> {
       bloodType,
       address,
       email,
-      img;
+      img,
+      status;
   //1080 x 1920 420dpi
 
   @override
@@ -64,6 +65,7 @@ class _HomeState extends State<Home> {
       address = preferences.getString('Address');
       img = preferences.getString('Img');
       email = preferences.getString('Email');
+      status = preferences.getString('status');
       print('Nameuser = $nameUser');
       print('Nameuser = $nameUser2');
       print('Gender = $gender');
@@ -236,7 +238,7 @@ class _HomeState extends State<Home> {
 
   Widget assignActivity() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         MaterialPageRoute route = MaterialPageRoute(
             builder: (value) => PatientList()); //วิธีเชื่อมหน้า
         Navigator.push(context, route);
@@ -440,8 +442,10 @@ class _HomeState extends State<Home> {
         onTap: () {
           Navigator.pop(
               context); // ลูกศรกลับ แก้ปัญหาเรื่องตัว Drawer ไม่หดกลับ
-          MaterialPageRoute route =
-              MaterialPageRoute(builder: (value) => SignUp()); //วิธีเชื่อมหน้า
+          MaterialPageRoute route = MaterialPageRoute(
+              builder: (value) => PatientList(
+                    paramPage: 'detail2',
+                  )); //วิธีเชื่อมหน้า
           Navigator.push(context, route);
         },
       );

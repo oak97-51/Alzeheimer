@@ -43,7 +43,7 @@ class _ScheduleState extends State<Schedule> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            Icons.chevron_left_rounded,
+            Icons.chevron_left,
             color: Colors.white,
             size: 35,
           ),
@@ -100,22 +100,18 @@ class _ScheduleState extends State<Schedule> {
                     child: ListTile(
                       title: Row(
                         //crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          
-                        ],
+                        children: <Widget>[],
                       ),
                       onTap: () {
                         // Toast.show("บันทึกข้อมูลเรียบร้อย", context,
                         //     duration: Toast.LENGTH_SHORT,
-                        //     gravity: Toast.BOTTOM);  
-
+                        //     gravity: Toast.BOTTOM);
 
                         // MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                        //     builder: (BuildContext context) => 
+                        //     builder: (BuildContext context) =>
                         //     Detail(paramId: patientModels[index].patientId,
                         //      ));
                         // Navigator.of(context).push(materialPageRoute);
-
 
                         //print('param : ${carModels[index].carplate}');
                       },
