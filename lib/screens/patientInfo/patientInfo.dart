@@ -57,7 +57,7 @@ class _PatientInfoState extends State<PatientInfo> {
           onPressed: () {
             MaterialPageRoute route =
                 MaterialPageRoute(builder: (value) => Home()); //วิธีเชื่อมหน้า
-            Navigator.pop(context, route);
+            Navigator.of(context).pop();
           },
         ),
         title: MyStyle().txt16Bold('ประวัติผู้ป่วย'),
@@ -456,6 +456,32 @@ class _PatientInfoState extends State<PatientInfo> {
     );
   }
 
+  Future<Null> deletePatient() async {
+    String url =
+        'http://restaurant2019.com/htdocs/deletePatient.php?isAdd=true';
+    //  print(url);
+    Response response = await Dio().get(url); // read data from api
+    // print('res ==> $response');
+    var result = json.decode(response.data); // ถอดรหัสให้เป็น ภาษาไทย
+    print('result = $result');
+
+    for (var map in result) {
+      patientModel = PatientModel.fromMap(map);
+      // print('pname = ${productModel.pname}');
+      // if (productModel.pname.isEmpty) {
+      // } else {}
+
+      setState(() {
+        // productModel = ProductModel.fromMap(map);
+        patientModels.add(patientModel);
+        reccount = patientModels.length.toString();
+      });
+      // print("data");
+    }
+
+    //print('http://restaurant2019.com/htdocs/photo/${patientModels[index].patientId}.jpg');
+  }
+
   Row patientAvatar(BuildContext context, int index) {
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -634,7 +660,7 @@ class _PatientInfoState extends State<PatientInfo> {
               //   children: <Widget>[
               //     TextButton(
               //       child: const Text('BUY TICKETS'),
-              //       onPressed: () {/* ... */},
+              //       onPressed : () {/* ... */},
               //     ),
               //     const SizedBox(width: 8),
               //     TextButton(

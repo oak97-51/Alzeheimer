@@ -17,7 +17,7 @@ Future<void> backDialog(
               onPressed: () {
                 MaterialPageRoute route = MaterialPageRoute(
                     builder: (value) => widget); //วิธีเชื่อมหน้า
-                Navigator.push(context, route);
+                Navigator.of(context).pop();
               },
               child: Text(
                 'OK',

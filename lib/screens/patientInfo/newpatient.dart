@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:Alzeheimer/screens/home.dart';
 import 'package:Alzeheimer/screens/patientInfo/patientInfo.dart';
 import 'package:Alzeheimer/utility/back_dialog.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
+import 'package:Alzeheimer/utility/my_constant.dart';
 import 'package:Alzeheimer/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +19,7 @@ class NewPatient extends StatefulWidget {
 class _NewPatientState extends State<NewPatient> {
   File file;
   //asdasdasdad
-  String chooseType,
-      firstName,
+  String firstName,
       test3,
       test4,
       lastName,
@@ -40,7 +42,7 @@ class _NewPatientState extends State<NewPatient> {
       gender,
       addressEmergency,
       img;
-  String user, password;
+  String user, password,urlImage;
   String r_dad,
       r_mom,
       r_child,
@@ -738,7 +740,7 @@ class _NewPatientState extends State<NewPatient> {
             color: MyStyle().mainColor,
             onPressed: () {
               print(
-                  'name = $firstName, lastName= $lastName,password =$password,chooseType,=$chooseType');
+                  'name = $firstName, lastName= $lastName,password =$password');
               if (firstName == null || firstName.isEmpty) {
                 print(
                     //ถ้ากรอกข้อมูลบน textfield ไปแล้วมันจะไม่เป็น null จะเป็น empty แทน
@@ -748,7 +750,10 @@ class _NewPatientState extends State<NewPatient> {
                 //   normalDialog(context, 'โปรดเลือกชนิดของผู้สมัคร');
               } else {
                 registerThread();
+                uploadImage();
                 backDialog(context, 'ลงทะเบียนสำเร็จ', PatientInfo());
+                print('suscess');
+                // registerSuscess();
               }
             },
             child: Text(
@@ -760,6 +765,31 @@ class _NewPatientState extends State<NewPatient> {
                   fontWeight: FontWeight.w700),
             )),
       );
+
+  SimpleDialog registerSuscess() {
+    return SimpleDialog(
+                title: Text('ลงทะเบียนสำเร็จ'),
+                // Pop จะกลับไปยัง state เดิม
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FlatButton(
+                        onPressed: () {
+                          MaterialPageRoute route = MaterialPageRoute(
+                              builder: (value) => Home()); //วิธีเชื่อมหน้า
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'OK',
+                          style: TextStyle(color: Colors.green),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+  }
 
   Future<Null> registerThread() async {
     //String url = 'http://127.0.0.1:8080/DeliveryFood/addUser.php?isAdd=true&Name=$name&User=$user&Password=$password&ChooseType=$chooseType';
@@ -774,6 +804,30 @@ class _NewPatientState extends State<NewPatient> {
       print('url : $urlServer');
     } catch (e) {
       print('Error');
+    }
+  }
+
+  Future<Null> uploadImage() async {
+    Random random = Random();
+    int i = random.nextInt(1000000);
+    String nameImage = 'Img$i.jpg';
+
+    print('nameImage = $nameImage, pathImage =${file.path}');
+    String url = '${MyConstant().domain}/htdocs/uploadPhoto.php';
+
+    try {
+      Map<String, dynamic> map = Map();
+      map['file'] =
+          await MultipartFile.fromFile(file.path, filename: nameImage);
+
+      FormData formData = FormData.fromMap(map);
+      await Dio().post(url, data: formData).then((value) { 
+        print('Response -> $value');
+        urlImage = '${MyConstant().domain}/htdocs/photo/$nameImage';
+        print('urlImage = $urlImage' );
+      });
+    } catch (e) {
+      print(e);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:Alzeheimer/screens/signin.dart';
+import 'package:Alzeheimer/screens/uploadImageDemo.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
