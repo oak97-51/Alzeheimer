@@ -5,6 +5,8 @@ import 'package:Alzeheimer/screens/assignActivity/patientList.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class Schedule extends StatefulWidget {
   final PatientByIDModel patientByIDModel;
@@ -25,10 +27,16 @@ class _ScheduleState extends State<Schedule> {
   PatientByIDModel patientByIDModel;
   String paramId, paramName;
 
+  // CalendarController calendarControllerX;
+  Map<DateTime, List> eventsx;
+  List selectedEventsx;
+  AnimationController animationControllerx;
+
   List<PatientByIDModel> patientByIDModels = List();
   @override
   void initState() {
     super.initState();
+    // calendarControllerX = CalendarController();
     // user = fetchUser();
     paramId = widget.paramId;
     paramName = widget.paramName;
@@ -64,10 +72,10 @@ class _ScheduleState extends State<Schedule> {
                 fit: BoxFit.cover,
               ),
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 40),
-              child: MyStyle().txt16Bold('${paramName} id: ${paramId}'),
-            )
+            // Container(
+            //   padding: const EdgeInsets.only(left: 40),
+            //   child: MyStyle().txt16Bold('${paramName} id: ${paramId}'),
+            // )
           ],
         ),
         backgroundColor: MyStyle().mainColor,
@@ -77,16 +85,19 @@ class _ScheduleState extends State<Schedule> {
         child: Column(
           children: <Widget>[
             MyStyle().mySizebox(),
-            Container(
-              decoration: new BoxDecoration(
-                color: Colors.grey,
-                borderRadius: new BorderRadius.circular(10.0),
-              ),
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width * 0.9,
-            ),
+            // Container(
+            //   decoration: new BoxDecoration(
+            //     color: Colors.grey,
+            //     borderRadius: new BorderRadius.circular(10.0),
+            //   ),
+            //   height: MediaQuery.of(context).size.height * 0.08,
+            //   width: MediaQuery.of(context).size.width * 0.9,
+            //   child: TableCalendar(
+            //     calendarController: calendarControllerX,
+            //   ),
+            // ),
             MyStyle().mySizebox(),
-            MyStyle().txt16BoldB('วันนี้, 8 มีนาคม 2564'),
+            MyStyle().txt16BoldB('วันนี้, 11 มีนาคม 2564'),
             Expanded(
               child: ListView.builder(
                 // itemCount: patientModels.length,

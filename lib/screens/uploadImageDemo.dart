@@ -4,16 +4,16 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
- 
+
 class UploadImageDemo extends StatefulWidget {
   UploadImageDemo() : super();
- 
+
   final String title = "Upload Image Demo";
- 
+
   @override
   UploadImageDemoState createState() => UploadImageDemoState();
 }
- 
+
 class UploadImageDemoState extends State<UploadImageDemo> {
   //
   static final String uploadEndPoint =
@@ -24,20 +24,20 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   File tmpFile;
   String errMessage = 'Error Uploading Image';
   String urlImage;
- 
+
   chooseImage() {
     setState(() {
       file = ImagePicker.pickImage(source: ImageSource.gallery);
     });
     setStatus('');
   }
- 
+
   setStatus(String message) {
     setState(() {
       status = message;
     });
   }
- 
+
   startUpload() {
     setStatus('Uploading Image...');
     if (null == tmpFile) {
@@ -46,11 +46,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     }
     String fileName = tmpFile.path.split('/').last;
     upload(fileName);
-    print('test');
+    print('test filename : $fileName');
   }
- 
+
   upload(String fileName) {
     print('test2');
+    print('host : $uploadEndPoint');
     http.post(uploadEndPoint, body: {
       "image": base64Image,
       "name": fileName,
@@ -62,7 +63,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       setStatus(error);
     });
   }
- 
+
   Widget showImage() {
     return FutureBuilder<File>(
       future: file,
@@ -91,7 +92,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       },
     );
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
