@@ -13,6 +13,7 @@ import 'package:Alzeheimer/utility/my_style.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:Alzeheimer/screens/uploadImageDemo.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -188,22 +189,29 @@ class _HomeState extends State<Home> {
   }
 
   Widget trackingPatient() {
-    return Container(
-      //margin: const EdgeInsets.only(left: 65, right: 65),
-      height: 106.0,
-      width: 101.0,
-      child: new Center(
-        widthFactor: 58,
-        heightFactor: 64,
-        child: new Image.asset(
-          'images/trackingPatient.png',
-          width: 58,
-          height: 64,
+    return GestureDetector(
+      onTap: (){
+        MaterialPageRoute route = MaterialPageRoute(
+            builder: (value) => UploadImageDemo()); //วิธีเชื่อมหน้า
+        Navigator.push(context, route);
+      },
+      child: Container(
+        //margin: const EdgeInsets.only(left: 65, right: 65),
+        height: 106.0,
+        width: 101.0,
+        child: new Center(
+          widthFactor: 58,
+          heightFactor: 64,
+          child: new Image.asset(
+            'images/trackingPatient.png',
+            width: 58,
+            height: 64,
+          ),
         ),
-      ),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.circular(35.0),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.circular(35.0),
+        ),
       ),
     );
   }
