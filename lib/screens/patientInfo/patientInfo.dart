@@ -4,6 +4,7 @@ import 'package:Alzeheimer/data/user.dart';
 import 'package:Alzeheimer/screens/home.dart';
 import 'package:Alzeheimer/screens/patientInfo/detail.dart';
 import 'package:Alzeheimer/screens/patientInfo/newpatient.dart';
+import 'package:Alzeheimer/utility/normal_dialog.dart';
 // import 'package:Alzeheimer/utility/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
@@ -116,11 +117,31 @@ class _PatientInfoState extends State<PatientInfo> {
                               formDetail(index),
                               Row(
                                 children: [
-                                  deleteIcon(),
+                                  InkWell(
+                                    child: IconButton(
+                                      icon: const Icon(Icons.edit),
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        print('Hello');
+                                        // deletePatient(patientModels[index]);
+                                      },
+                                    ),
+                                  ),
+                                  // deleteIcon(index),
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  editIcon(),
+                                  // editIcon(),
+                                  InkWell(
+                                    child: IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        print('Hello');
+                                        deletePatient(patientModels[index]);
+                                      },
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -146,220 +167,6 @@ class _PatientInfoState extends State<PatientInfo> {
           ],
         ),
       ),
-      // body: SingleChildScrollView(
-      //   child: Container(
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: <Widget>[
-      //         Container(
-      //           child:Text("test")
-      //         ),
-      //         Expanded(
-      //           child: ListView.builder(
-      //             // child: Text('${patientModels[0].patientId}'),
-      //             itemCount: patientModels.length,
-      //             itemBuilder: (context, index) => Container(
-      //               margin: EdgeInsets.all(8.0),
-      //               height: MediaQuery.of(context).size.height / 1.50,
-      //               width: MediaQuery.of(context).size.width,
-      //               child: Card(
-      //                 color: Colors.lightBlueAccent[50],
-      //                 elevation: 8,
-      //                 child: ListTile(
-      //                   title: Column(
-      //                     crossAxisAlignment: CrossAxisAlignment.stretch,
-      //                     children: <Widget>[
-      //                       Row(
-      //                         mainAxisSize: MainAxisSize.max,
-      //                         mainAxisAlignment: MainAxisAlignment.center,
-      //                         children: <Widget>[
-      //                           Container(
-      //                             width:
-      //                                 MediaQuery.of(context).size.width / 1.3,
-      //                             margin: EdgeInsets.all(10),
-      //                             child: ClipRRect(
-      //                               borderRadius: BorderRadius.circular(20),
-      //                               child: Text("${patientModels[index].patientId}"),
-      //                               // child: Image(
-      //                               //   image: NetworkImage(
-      //                               //       'http://restaurant2019.com/htdocs/photo/${patientModels[index].patientId}.jpg'),
-      //                               // ),
-      //                             ),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       Row(
-      //                         children: <Widget>[
-      //                           Text(
-      //                             '${patientModels[index].name}',
-      //                             style: TextStyle(
-      //                                 fontSize: 20,
-      //                                 color: Colors.lightBlueAccent),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       Row(
-      //                         children: <Widget>[
-      //                           Text(
-      //                             '${patientModels[index].age}',
-      //                             style: TextStyle(
-      //                                 fontSize: 16,
-      //                                 color: Colors.blueGrey[300]),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                       Row(
-      //                         children: <Widget>[
-      //                           Text(
-      //                             'โรคประจำตัว : ${patientModels[index].disease}',
-      //                             style: TextStyle(
-      //                                 fontSize: 16,
-      //                                 color: Colors.blueGrey[300]),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   // subtitle: Text(productModels[index].price_1),
-      //                   // http://restaurant2018.com/api/carservice/photo/รยล9200.jpg
-      //                   // trailing: Column(
-      //                   //   crossAxisAlignment: CrossAxisAlignment.center,
-      //                   //   children: <Widget>[
-      //                   //     Image.network(
-      //                   //       'http://restaurant2018.com/api/carservice/photo/${carModels[index].carplate}.jpg',
-      //                   //       fit: BoxFit.fitWidth,
-      //                   //     ),
-      //                   //     // Image.asset(
-      //                   //     //   'images/menu15.png',
-      //                   //     //   width: 120,
-      //                   //     //   height: 150,
-      //                   //     //   fit: BoxFit.fitWidth,
-      //                   //     // ),
-      //                   //   ],
-      //                   // ),
-      //                   //   onTap: () {
-      //                   //     // Toast.show("บันทึกข้อมูลเรียบร้อย", context,
-      //                   //     //     duration: Toast.LENGTH_SHORT,
-      //                   //     //     gravity: Toast.BOTTOM);
-      //                   //     MaterialPageRoute materialPageRoute =
-      //                   //         MaterialPageRoute(
-      //                   //             builder: (BuildContext context) =>
-      //                   //                 LoadCarDetailM1(
-      //                   //                   paramMenuName: "ทะเบียนรถยนต์",
-      //                   //                   paramUser: paramUser,
-      //                   //                   paramCarplate:
-      //                   //                       '${carModels[index].carplate}',
-      //                   //                 ));
-      //                   //     Navigator.of(context).push(materialPageRoute);
-      //                   //     print('param : ${carModels[index].carplate}');
-      //                   //   },
-      //                   // )),
-      //                 ),
-      //               ),
-      //             ),
-      //             // Container(
-      //             //   //width: 150,
-      //             //   height: 150,
-      //             //   margin:
-      //             //       EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
-      //             //   // height: MediaQuery.of(context).size.height / 9,
-      //             //   child: getListView(),
-      //             // ),
-      //             // Container(
-      //             //   height: screenHeight,
-      //             //   child: FutureBuilder<List<User>>(
-      //             //     future: fetchUser(),
-      //             //     builder: (context, snapshot) {
-      //             //       if (snapshot.hasData) {
-      //             //         List<User> user = snapshot.data;
-      //             //         return ListView.builder(
-      //             //           physics:
-      //             //               BouncingScrollPhysics(), // คือ เมื่อ scroll จนสุดขอบมันจะเด้ง ๆ
-      //             //           scrollDirection: Axis.vertical,
-      //             //           itemCount: user
-      //             //               .length, //คือ ระบุว่าจะให้ list มีกี่ item หรือ จำนวน list
-      //             //           itemBuilder: (BuildContext context, int index) {
-      //             //             //จะทำงานตาม itemCount ที่ใช้ในการสร้าง list แต่ละตัวขึ้นมา
-      //             //             return Container(
-      //             //               alignment: Alignment.topCenter,
-      //             //               width: screenWidth * 0.5,
-      //             //               child: Card(
-      //             //                 clipBehavior: Clip
-      //             //                     .antiAlias, //เท่าที่เข้าใจ คือ มันช่วยลดรอยหยักของขอบภาพที่แตกใน card โดยใส่เทคนิคการเบลอเข้าไป
-      //             //                 color: Colors.grey[100],
-      //             //                 shape: RoundedRectangleBorder(
-      //             //                   borderRadius: BorderRadius.circular(12.0),
-      //             //                 ),
-      //             //                 elevation:
-      //             //                     1, //คือ การยกระดับของ card ขึ้นมาโดยการใส่เงาลงไป
-      //             //                 child: Column(
-      //             //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //             //                   children: <Widget>[
-      //             //                     // AspectRatio(
-      //             //                     //   aspectRatio: 15.0 / 11.0,
-      //             //                     //   child: Image.network(
-      //             //                     //     user[index].image,
-      //             //                     //     fit: BoxFit.cover,
-      //             //                     //   ),
-      //             //                     // ),
-      //             //                     Padding(
-      //             //                       padding: EdgeInsets.only(
-      //             //                         left: 10.0,
-      //             //                         right: 16.0,
-      //             //                         top: 12.0,
-      //             //                         bottom: 8.0,
-      //             //                       ),
-      //             //                       child: Row(
-      //             //                         children: <Widget>[
-      //             //                           Container(
-      //             //                             alignment: Alignment.center,
-      //             //                             child: Image.network(
-      //             //                               user[index].profile,
-      //             //                               //patientModels[index].photo,
-      //             //                               fit: BoxFit.cover,
-      //             //                             ),
-      //             //                           ),
-      //             //                           Container(
-      //             //                             child: Text(
-      //             //                               user[index].title,
-      //             //                               //patientModels[index].name,
-      //             //                             ),
-      //             //                           ),
-      //             //                           Container(
-      //             //                             child: Text('${user[index].id}'),
-      //             //                           ),
-      //             //                         ],
-      //             //                       ),
-      //             //                     ),
-      //             //                   ],
-      //             //                 ),
-      //             //               ),
-      //             //             );
-      //             //           },
-      //             //         );
-      //             //       }
-      //             //       return Center(
-      //             //         child: SizedBox(
-      //             //           height: 100,
-      //             //           width: 100,
-      //             //           child: CircularProgressIndicator(
-      //             //             // strokeWidth: 10,
-      //             //             //backgroundColor: Colors.cyanAccent,
-      //             //             valueColor: new AlwaysStoppedAnimation<Color>(
-      //             //                 MyStyle().mainColor),
-      //             //           ),
-      //             //         ),
-      //             //       );
-      //             //     },
-      //             //   ),
-      //             // ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
 
     // Column(
@@ -408,6 +215,31 @@ class _PatientInfoState extends State<PatientInfo> {
     // ),
   }
 
+  GestureDetector deleteIcon(int index) {
+    return GestureDetector(
+      onTap: () {
+        normalDialog(context, 'Hello');
+        // deletePatient(patientModels[index]);
+        print('In');
+      },
+      child: Container(
+        height: 30,
+        width: 30,
+        child: RawMaterialButton(
+          onPressed: () {},
+          elevation: 2.0,
+          fillColor: MyStyle().mainColor,
+          child: Image.asset(
+            'images/delete_icon.png',
+            height: 16,
+            width: 16,
+          ),
+          shape: CircleBorder(),
+        ),
+      ),
+    );
+  }
+
   // Future<Null> routeToService(Widget myWidget, UserModel userModel) async {
   //   SharedPreferences preferences = await SharedPreferences.getInstance();
   //   preferences.setString('id',userModel.adminId);
@@ -419,68 +251,60 @@ class _PatientInfoState extends State<PatientInfo> {
   //   Navigator.pushAndRemoveUntil(context,route,(route)=>false);
   // }
 
-  Container editIcon() {
-    return Container(
-      height: 30,
-      width: 30,
-      child: RawMaterialButton(
-        onPressed: () {},
-        elevation: 2.0,
-        fillColor: MyStyle().mainColor,
-        child: Image.asset(
-          'images/edit_icon.png',
-          height: 16,
-          width: 16,
+  InkWell editIcon() {
+    return InkWell(
+      onTap: () {
+        print('Hello');
+      },
+      child: Container(
+        height: 30,
+        width: 30,
+        child: RawMaterialButton(
+          onPressed: () {},
+          elevation: 2.0,
+          fillColor: MyStyle().mainColor,
+          child: Image.asset(
+            'images/edit_icon.png',
+            height: 16,
+            width: 16,
+          ),
+          //padding: EdgeInsets.all(10.0),
+          shape: CircleBorder(),
         ),
-        //padding: EdgeInsets.all(10.0),
-        shape: CircleBorder(),
       ),
     );
   }
 
-  Container deleteIcon() {
-    return Container(
-      height: 30,
-      width: 30,
-      child: RawMaterialButton(
-        onPressed: () {},
-        elevation: 2.0,
-        fillColor: MyStyle().mainColor,
-        child: Image.asset(
-          'images/delete_icon.png',
-          height: 16,
-          width: 16,
-        ),
-        shape: CircleBorder(),
+  Future<Null> deletePatient(PatientModel patientModel2) async {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title:
+            MyStyle().txt16BoldB('ต้องการลบผู้ป่วย ชื่อ ${patientModel2.name}'),
+        children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              FlatButton(
+                onPressed: () async{
+                  Navigator.pop(context);
+                  String url ='http://restaurant2019.com/htdocs/deletePatient.php?isAdd=true&PatientId=${patientModel2.patientId}';
+                  await Dio().get(url).then((value)=>readPatient());
+                },
+                child: Text('ยืนยัน'),
+              ),FlatButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Text('ยกเลิก'),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
 
-  Future<Null> deletePatient() async {
-    String url =
-        'http://restaurant2019.com/htdocs/deletePatient.php?isAdd=true';
-    //  print(url);
-    Response response = await Dio().get(url); // read data from api
-    // print('res ==> $response');
-    var result = json.decode(response.data); // ถอดรหัสให้เป็น ภาษาไทย
-    print('result = $result');
-
-    for (var map in result) {
-      patientModel = PatientModel.fromMap(map);
-      // print('pname = ${productModel.pname}');
-      // if (productModel.pname.isEmpty) {
-      // } else {}
-
-      setState(() {
-        // productModel = ProductModel.fromMap(map);
-        patientModels.add(patientModel);
-        reccount = patientModels.length.toString();
-      });
-      // print("data");
-    }
-
-    //print('http://restaurant2019.com/htdocs/photo/${patientModels[index].patientId}.jpg');
-  }
+  //print('http://restaurant2019.com/htdocs/photo/${patientModels[index].patientId}.jpg');
 
   Row patientAvatar(BuildContext context, int index) {
     return Row(
@@ -678,6 +502,10 @@ class _PatientInfoState extends State<PatientInfo> {
   }
 
   Future<Null> readPatient() async {
+
+    if(patientModels.length!=0){
+      patientModels.clear();
+    }
     String url =
         'http://restaurant2019.com/htdocs/fetch_patient.php?isAdd=true';
     //  print(url);
