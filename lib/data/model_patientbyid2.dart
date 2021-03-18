@@ -1,7 +1,7 @@
-class PatientModel {
+class PatientByIDModel2 {
   String patientId;
   String img;
-  String name;
+  String firstName;
   String age;
   String disease;
   String lastName;
@@ -22,10 +22,10 @@ class PatientModel {
   String etc;
   String historyAllergy;
 
-  PatientModel(
+  PatientByIDModel2(
       this.patientId,
       this.img,
-      this.name,
+      this.firstName,
       this.age,
       this.disease,
       this.lastName,
@@ -46,10 +46,10 @@ class PatientModel {
       this.etc,
       this.historyAllergy);
 
-  PatientModel.fromMap(Map<String, dynamic> map) {
+  PatientByIDModel2.fromMap(Map<String, dynamic> map) {
     patientId = map['PatientId'];
     img = map['Img'];
-    name = map['FirstName'];
+    firstName = map['FirstName'];
     age = map['Age'];
     disease = map['Disease'];
     lastName = map['LastName'];
@@ -70,38 +70,32 @@ class PatientModel {
     etc = map['Etc'];
     historyAllergy = map['HistoryAllergy'];
   }
+
+  // Map<String, dynamic> tomap() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['PatientId'] = this.patientId;
+  //   data['Img'] = this.img;
+  //   data['FirstName'] = this.firstName;
+  //   data['Age'] = this.age;
+  //   data['Disease'] = this.disease;
+  //   data['LastName'] = this.lastName;
+  //   data['Gender'] = this.gender;
+  //   data['Identity'] = this.identity;
+  //   data['DateOfBirth'] = this.dateOfBirth;
+  //   data['Career'] = this.career;
+  //   data['Nationality'] = this.nationality;
+  //   data['Religion'] = this.religion;
+  //   data['BloodGroup'] = this.bloodGroup;
+  //   data['Address'] = this.address;
+  //   data['Tel'] = this.tel;
+  //   data['NameOfMom'] = this.nameOfMom;
+  //   data['NameOfDad'] = this.nameOfDad;
+  //   data['NameEmergency'] = this.nameEmergency;
+  //   data['AddressEmergency'] = this.addressEmergency;
+  //   data['TelEmergency'] = this.telEmergency;
+  //   data['Etc'] = this.etc;
+  //   data['HistoryAllergy'] = this.historyAllergy;
+  //   return data;
+  // }
 }
 
-// class PatientModel {
-//   String patientId;
-//   String img;
-//   String name;
-//   String age;
-//   String disease;
-
-//   PatientModel(
-//     {this.patientId,
-//     this.img,
-//     this.name,
-//     this.age,
-//     this.disease,}
-//   );
-
-//   PatientModel.fromJson(Map<String, dynamic> json) {
-//     patientId = json['PatientId'];
-//     img = json['Img'];
-//     name = json['FirstName'];
-//     age = json['Age'];
-//     disease = json['Disease'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['PatientId'] = this.patientId;
-//     data['Img'] = this.img;
-//     data['FirstName'] = this.name;
-//     data['Age'] = this.age;
-//     data['Disease'] = this.disease;
-//     return data;
-//   }
-// }

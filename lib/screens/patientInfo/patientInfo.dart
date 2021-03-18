@@ -1,24 +1,31 @@
 import 'dart:convert';
 import 'package:Alzeheimer/data/model_patient.dart';
+import 'package:Alzeheimer/data/model_patientFull.dart';
+import 'package:Alzeheimer/data/model_patientbyid.dart';
+import 'package:Alzeheimer/data/model_patientbyid2.dart';
 import 'package:Alzeheimer/data/user.dart';
 import 'package:Alzeheimer/screens/home.dart';
 import 'package:Alzeheimer/screens/patientInfo/detail.dart';
 import 'package:Alzeheimer/screens/patientInfo/newpatient.dart';
+import 'package:Alzeheimer/screens/patientInfo/editPatientInfo.dart';
 import 'package:Alzeheimer/utility/normal_dialog.dart';
 // import 'package:Alzeheimer/utility/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientInfo extends StatefulWidget {
   final PatientModel patientModel;
+  final PatientByIDModel2 patientByIDModel2;
   @override
   _PatientInfoState createState() => _PatientInfoState();
 
   PatientInfo({
     Key key,
     this.patientModel,
+    this.patientByIDModel2,
   }) : super(key: key);
 }
 
@@ -26,9 +33,11 @@ class _PatientInfoState extends State<PatientInfo> {
   Future<List<User>> user;
   Future<List<User>> patient;
   PatientModel patientModel;
+  PatientByIDModel2 patientByIDModel2;
   int i;
 
   List<PatientModel> patientModels = List();
+  List<PatientByIDModel2> patientByIDModels2 = List();
 
   String reccount = "0";
 
@@ -38,8 +47,12 @@ class _PatientInfoState extends State<PatientInfo> {
     // user = fetchUser();
 
     patientModel = widget.patientModel;
+    patientByIDModel2 = widget.patientByIDModel2;
     print("pageload");
+    
     readPatient();
+    // readPatient2();
+    
   }
 
   @override
@@ -122,7 +135,8 @@ class _PatientInfoState extends State<PatientInfo> {
                                       icon: const Icon(Icons.edit),
                                       color: Colors.black,
                                       onPressed: () {
-                                        print('Hello');
+                                        confirmDialog(index);
+
                                         // deletePatient(patientModels[index]);
                                       },
                                     ),
@@ -215,6 +229,64 @@ class _PatientInfoState extends State<PatientInfo> {
     // ),
   }
 
+  Future<Null> editThread() async {
+    String patientId = patientByIDModel2.patientId;
+    String id = patientModel.patientId;
+    print('id = ${patientModel.patientId}');
+    print('test_id');
+  }
+  
+
+  Future<Null> routeToService(Widget myWidget, PatientByIDModel patientByIDModel) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('PatientId', patientByIDModel.patientId);
+    preferences.setString('FirstName', patientByIDModel.firstName);
+    preferences.setString('LastName', patientByIDModel.lastName);
+
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => myWidget, 
+    );
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
+  }
+
+
+  Future<Null> confirmDialog(int index) async {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text('คุณต้องการแก้ไข้ข้อมูล ?'),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              OutlineButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // editThread();
+
+
+                  MaterialPageRoute route = MaterialPageRoute(
+                      builder: (value) => EditPatientInfo(paramId: patientModels[index].patientId,paramFirstName: patientModels[index].name,paramLastName: patientModels[index].lastName,)); //วิธีเชื่อมหน้า
+                  Navigator.push(context, route);
+
+
+                  // routeToService(EditPatientInfo(),patientByIDModel);
+
+                  // print('Name Patient : ${patientByIDModel.firstName}');
+                },
+                child: Text('ยืนยัน'),
+              ),
+              OutlineButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('ยกเลิก'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   GestureDetector deleteIcon(int index) {
     return GestureDetector(
       onTap: () {
@@ -282,17 +354,20 @@ class _PatientInfoState extends State<PatientInfo> {
         title:
             MyStyle().txt16BoldB('ต้องการลบผู้ป่วย ชื่อ ${patientModel2.name}'),
         children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               FlatButton(
-                onPressed: () async{
+                onPressed: () async {
                   Navigator.pop(context);
-                  String url ='http://restaurant2019.com/htdocs/deletePatient.php?isAdd=true&PatientId=${patientModel2.patientId}';
-                  await Dio().get(url).then((value)=>readPatient());
+                  String url =
+                      'http://restaurant2019.com/htdocs/deletePatient.php?isAdd=true&PatientId=${patientModel2.patientId}';
+                  await Dio().get(url).then((value) => readPatient());
                 },
                 child: Text('ยืนยัน'),
-              ),FlatButton(
-                onPressed: (){
+              ),
+              FlatButton(
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Text('ยกเลิก'),
@@ -502,8 +577,7 @@ class _PatientInfoState extends State<PatientInfo> {
   }
 
   Future<Null> readPatient() async {
-
-    if(patientModels.length!=0){
+    if (patientModels.length != 0) {
       patientModels.clear();
     }
     String url =
@@ -524,6 +598,35 @@ class _PatientInfoState extends State<PatientInfo> {
         // productModel = ProductModel.fromMap(map);
         patientModels.add(patientModel);
         reccount = patientModels.length.toString();
+      });
+      // print("data");
+    }
+
+    //print('http://restaurant2019.com/htdocs/photo/${patientModels[index].patientId}.jpg');
+  }
+
+  Future<Null> readPatient2() async {
+    if (patientByIDModels2.length != 0) {
+      patientByIDModels2.clear();
+    }
+    String url =
+        'http://restaurant2019.com/htdocs/fetch_patient.php?isAdd=true';
+    //  print(url);
+    Response response = await Dio().get(url); // read data from api
+    // print('res ==> $response');
+    var result = json.decode(response.data); // ถอดรหัสให้เป็น ภาษาไทย
+    print('result = $result');
+
+    for (var map in result) {
+      patientByIDModel2 = PatientByIDModel2.fromMap(map);
+      // print('pname = ${productModel.pname}');
+      // if (productModel.pname.isEmpty) {
+      // } else {}
+
+      setState(() {
+        // productModel = ProductModel.fromMap(map);
+        patientByIDModels2.add(patientByIDModel2);
+        reccount = patientByIDModels2.length.toString();
       });
       // print("data");
     }
