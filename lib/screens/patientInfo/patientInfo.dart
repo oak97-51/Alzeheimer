@@ -50,8 +50,9 @@ class _PatientInfoState extends State<PatientInfo> {
     patientByIDModel2 = widget.patientByIDModel2;
     print("pageload");
     
+    //readPatient1 กับ 2 โมเดลคนละตัว 1 ใช้ delete 2 ใช้ edit อนาคตต้องแก้
     readPatient();
-    // readPatient2();
+    readPatient2();
     
   }
 
@@ -266,8 +267,15 @@ class _PatientInfoState extends State<PatientInfo> {
 
 
                   MaterialPageRoute route = MaterialPageRoute(
-                      builder: (value) => EditPatientInfo(paramId: patientModels[index].patientId,paramFirstName: patientModels[index].name,paramLastName: patientModels[index].lastName,)); //วิธีเชื่อมหน้า
-                  Navigator.push(context, route);
+                      builder: (value) => EditPatientInfo(paramId: patientByIDModels2[index].patientId,paramFirstName: patientByIDModels2[index].firstName,paramLastName: patientByIDModels2[index].lastName,
+                      paramImg:patientByIDModels2[index].img,paramAge: patientByIDModels2[index].age,paramDisease: patientByIDModels2[index].disease,paramGender: patientByIDModels2[index].gender,
+                      paramIdentity: patientByIDModels2[index].identity,paramDateOfBirth: patientByIDModels2[index].dateOfBirth,paramCareer: patientByIDModels2[index].career,
+                      paramNationality: patientByIDModels2[index].nationality,paramReligion: patientByIDModels2[index].religion,paramBloodGroup: patientByIDModels2[index].bloodGroup,
+                      paramAddress: patientByIDModels2[index].address,paramTel: patientByIDModels2[index].tel,paramNameOfMom:patientByIDModels2[index].nameOfMom,paramNameOfDad: patientByIDModels2[index].nameOfDad,
+                      paramNameEmergency: patientByIDModels2[index].nameEmergency,paramAddressEmergency: patientByIDModels2[index].addressEmergency,paramTelEmergency: patientByIDModels2[index].telEmergency,
+                      paramEtc: patientByIDModels2[index].etc,paramHistoryAllergy: patientByIDModels2[index].historyAllergy,)); //วิธีเชื่อมหน้า
+                  Navigator.push(context, route).then((value) => readPatient2());
+                  //.then((value) => readPatient());
 
 
                   // routeToService(EditPatientInfo(),patientByIDModel);

@@ -3,11 +3,12 @@ import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:Alzeheimer/data/model_patientbyid.dart';
+import 'package:Alzeheimer/data/model_patientbyid2.dart';
 // import 'package:http/http.dart' as http;
 
 class Detail extends StatefulWidget {
   // final PatientModel patientModel;
-  final PatientByIDModel patientByIDModel;
+  final PatientByIDModel2 patientByIDModel2;
   final String paramId;
   @override
   _DetailState createState() => _DetailState();
@@ -15,7 +16,7 @@ class Detail extends StatefulWidget {
   Detail({
     Key key,
     this.paramId,
-    this.patientByIDModel,
+    this.patientByIDModel2,
     // this.patientModel,
   }) : super(key: key);
 }
@@ -23,17 +24,17 @@ class Detail extends StatefulWidget {
 class _DetailState extends State<Detail> {
   //Future<List<User>> patient;
   // PatientModel patientModel;
-  PatientByIDModel patientByIDModel;
+  PatientByIDModel2 patientByIDModel2;
   String paramId;
 
-  List<PatientByIDModel> patientByIDModels = List();
+  List<PatientByIDModel2> patientByIDModels2 = List();
 
   @override
   void initState() {
     super.initState();
     // user = fetchUser();
     paramId = widget.paramId;
-    patientByIDModel = widget.patientByIDModel;
+    patientByIDModel2 = widget.patientByIDModel2;
     print("pageload");
     readPatient();
   }
@@ -72,14 +73,14 @@ class _DetailState extends State<Detail> {
                             margin: EdgeInsets.all(10),
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network('${patientByIDModel.img}')),
+                                child: Image.network('${patientByIDModel2.img}')),
                           )
-                          // Text('เลขที่บัตรประชาชน : ${patientByIDModel.identity}'),
+                          // Text('เลขที่บัตรประชาชน : ${patientByIDModel2.identity}'),
                         ]),
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ชื่อ-นามสกุล : ${patientByIDModel.firstName}  ${patientByIDModel.lastName}',
+                          '     ชื่อ-นามสกุล : ${patientByIDModel2.firstName}  ${patientByIDModel2.lastName}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -87,7 +88,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     เลขที่บัตรประชาชน : ${patientByIDModel.identity}',
+                          '     เลขที่บัตรประชาชน : ${patientByIDModel2.identity}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -95,7 +96,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     วันเดือนปีเกิด : ${patientByIDModel.dateOfBirth}',
+                          '     วันเดือนปีเกิด : ${patientByIDModel2.dateOfBirth}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -103,7 +104,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     เพศ : ${patientByIDModel.gender}',
+                          '     เพศ : ${patientByIDModel2.gender}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -111,7 +112,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     อายุ : ${patientByIDModel.age}',
+                          '     อายุ : ${patientByIDModel2.age}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -119,7 +120,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     อาชีพ : ${patientByIDModel.career}',
+                          '     อาชีพ : ${patientByIDModel2.career}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -127,7 +128,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     สัญชาติ : ${patientByIDModel.nationality}',
+                          '     สัญชาติ : ${patientByIDModel2.nationality}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -135,7 +136,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ศาสนา : ${patientByIDModel.religion}',
+                          '     ศาสนา : ${patientByIDModel2.religion}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -143,7 +144,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     หมู่เลือด : ${patientByIDModel.bloodGroup}',
+                          '     หมู่เลือด : ${patientByIDModel2.bloodGroup}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -151,7 +152,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ที่อยู่ : ${patientByIDModel.address}',
+                          '     ที่อยู่ : ${patientByIDModel2.address}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -159,7 +160,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     เบอร์โทรศัพท์ : ${patientByIDModel.tel}',
+                          '     เบอร์โทรศัพท์ : ${patientByIDModel2.tel}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -167,7 +168,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ชื่อ-นามสกุล บิดา : ${patientByIDModel.nameOfDad}',
+                          '     ชื่อ-นามสกุล บิดา : ${patientByIDModel2.nameOfDad}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -175,7 +176,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ชื่อ-นามสกุล มารดา : ${patientByIDModel.nameOfMom}',
+                          '     ชื่อ-นามสกุล มารดา : ${patientByIDModel2.nameOfMom}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -183,7 +184,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ชื่อผู้ติดต่อได้กรณีฉุกเฉิน : ${patientByIDModel.nameEmergency}',
+                          '     ชื่อผู้ติดต่อได้กรณีฉุกเฉิน : ${patientByIDModel2.nameEmergency}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -191,7 +192,7 @@ class _DetailState extends State<Detail> {
                     Row(
                       children: <Widget>[
                         Text(
-                          '     ที่อยู่ผู้ติดต่อได้ : ${patientByIDModel.addressEmergency}',
+                          '     ที่อยู่ผู้ติดต่อได้ : ${patientByIDModel2.addressEmergency}',
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ],
@@ -216,14 +217,14 @@ class _DetailState extends State<Detail> {
     print('result = $result');
 
     for (var map in result) {
-      patientByIDModel = PatientByIDModel.fromMap(map);
-      print('pname = ${patientByIDModel.lastName}');
+      patientByIDModel2 = PatientByIDModel2.fromMap(map);
+      print('pname = ${patientByIDModel2.lastName}');
       // if (productModel.pname.isEmpty) {
       // } else {}
 
       setState(() {
         // productModel = ProductModel.fromMap(map);
-        patientByIDModels.add(patientByIDModel);
+        patientByIDModels2.add(patientByIDModel2);
         // reccount = patientModels.length.toString();
       });
       // print("data");

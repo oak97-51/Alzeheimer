@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:Alzeheimer/data/model_patientbyid.dart';
 import 'package:Alzeheimer/screens/home.dart';
+import 'package:Alzeheimer/screens/patientInfo/detail.dart';
 import 'package:Alzeheimer/screens/patientInfo/patientInfo.dart';
 import 'package:Alzeheimer/utility/back_dialog.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
@@ -16,7 +17,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class EditPatientInfo extends StatefulWidget {
   final PatientByIDModel patientModelIDModel;
-  final String paramId,paramFirstName,paramLastName;
+  final String paramId,paramFirstName,paramLastName,paramImg,
+  paramAge,paramDisease,paramGender,paramIdentity,paramDateOfBirth,paramCareer,paramNationality,
+  paramReligion,paramBloodGroup,paramAddress,paramTel,paramNameOfMom,paramNameOfDad,paramNameEmergency,
+  paramAddressEmergency,paramTelEmergency,paramEtc,paramHistoryAllergy;
   @override
   _EditPatientInfoState createState() => _EditPatientInfoState();
 
@@ -26,13 +30,28 @@ class EditPatientInfo extends StatefulWidget {
     this.paramId,
     this.paramFirstName,
     this.paramLastName,
+    this.paramImg,
+    this.paramAge,
+    this.paramDisease,
+    this.paramGender,
+    this.paramIdentity,
+    this.paramDateOfBirth,
+    this.paramCareer,
+    this.paramNationality,
+    this.paramReligion,
+    this.paramBloodGroup,
+    this.paramAddress,
+    this.paramTel,this.paramNameOfMom,this.paramNameOfDad,this.paramNameEmergency,this.paramAddressEmergency,this.paramTelEmergency,this.paramEtc,this.paramHistoryAllergy
   }) : super(key: key);
 }
 
 class _EditPatientInfoState extends State<EditPatientInfo> {
   PatientByIDModel patientModelIDModel;
   List<PatientByIDModel> patientByIDModels = List();
-  String paramId,paramFirstName,paramLastName;
+  String paramId,paramFirstName,paramLastName,paramImg,
+  paramAge,paramDisease,paramGender,paramIdentity,paramDateOfBirth,paramCareer,paramNationality,
+  paramReligion,paramBloodGroup,paramAddress,paramTel,paramNameOfMom,paramNameOfDad,paramNameEmergency,
+  paramAddressEmergency,paramTelEmergency,paramEtc,paramHistoryAllergy;
   @override
   void initState() {
     super.initState();
@@ -40,10 +59,24 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
     paramId = widget.paramId;
     paramFirstName = widget.paramFirstName;
     paramLastName = widget.paramLastName;
+    paramImg = widget.paramImg;
+    paramAge = widget.paramAge;
+    paramDisease = widget.paramDisease;
+    paramGender = widget.paramGender;
+    paramIdentity = widget.paramIdentity;
+    paramDateOfBirth = widget.paramDateOfBirth;
+    paramCareer = widget.paramCareer;
+    paramNationality = widget.paramNationality;
+    paramReligion = widget.paramReligion;
+    paramBloodGroup = widget.paramBloodGroup;
+    paramAddress = widget.paramAddress;
+    paramTel = widget.paramTel; paramNameOfMom = widget.paramNameOfMom; paramNameOfDad = widget.paramNameOfDad; 
+    paramNameEmergency = widget.paramNameEmergency; paramAddressEmergency = widget.paramAddressEmergency; paramTelEmergency = widget.paramTelEmergency;
+    paramEtc = widget.paramEtc; paramHistoryAllergy = widget.paramHistoryAllergy;
 
     // patientModelIDModel = widget.patientModelIDModel;
     print("pageload");
-    readPatient();
+    // readPatient();
     // userPreferences();
   }
   File file;
@@ -72,17 +105,7 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
       addressEmergency,
       img;
   String user, password,urlImage,patientId;
-  String r_dad,
-      r_mom,
-      r_child,
-      r_wife,
-      r_husband,
-      r_relative,
-      r_parent,
-      r_boss,
-      r_friend,
-      r_etc,
-      contact;
+  String contact;
   Future<Null> userPreferences() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -250,7 +273,7 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
                   MyStyle().mySizeboxw24(),
                   backButton(),
                   MyStyle().mySizeboxw24(),
-                  registerButton(),
+                  editButton(),
                 ],
               ),
               MyStyle().mySizebox(),
@@ -260,7 +283,23 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
       ),
     );
   }
+  Future<Null> updatePatient() async {
+    print('ParamId =  $paramId');
 
+    String url = 'http://restaurant2019.com/htdocs/updatePatient.php?isAdd=true&PatientId=$paramId&Img=$img&FirstName=$paramFirstName&Age=$paramAge&Disease=$paramDisease&LastName=$paramLastName&Gender=$paramGender&Identity=$paramIdentity&DateOfBirth=$paramDateOfBirth&Career=$paramCareer&Nationality=$paramNationality&Religion=$paramReligion&BloodGroup=$paramBloodGroup&Address=$paramAddress&Tel=$paramTel&NameOfMom=$paramNameOfMom&NameOfDad=$paramNameOfDad&NameEmergency=$paramNameEmergency&AddressEmergency=$paramAddressEmergency&TelEmergency=$paramTelEmergency&Etc=$paramEtc&HistoryAllergy=$paramHistoryAllergy';
+
+    Response res = await Dio().get(url);
+    if(res.toString() == 'true'){
+      // MaterialPageRoute route =
+      //         MaterialPageRoute(builder: (value) => Detail()); //วิธีเชื่อมหน้า
+      //     Navigator.push(context, route);
+      MaterialPageRoute route =
+              MaterialPageRoute(builder: (value) => PatientInfo()); //วิธีเชื่อมหน้า
+          Navigator.push(context, route).then((value) => readPatient());
+    }else{
+      normalDialog(context,'ยังไม่สำเร็จ');
+    }
+  }
   Future<Null> readPatient() async {
     if (patientByIDModels.length != 0) {
       patientByIDModels.clear();
@@ -383,11 +422,15 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               //setstate ถ้าเลือกแล้วจะวาด state ใหม่ state จะถูกวาดขึ้นมาครั้งเดียวตอนแรก
               children: <Widget>[
                 Radio(
-                  value: 'man',
+                  value: '$paramGender',
                   groupValue: gender,
+                  focusColor: Colors.black,
                   onChanged: (value) {
-                    setState(() {
+                    print('$value');
+                      setState(() {
+                      
                       gender = value;
+                      print('$value');
                     });
                   },
                 ),
@@ -400,6 +443,21 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
           ),
         ],
       );
+
+  Future<Null> changeGender(value) async{
+        if(value == paramGender){
+          setState(() {
+            value = null;
+                      // gender = value;
+            print('$value');
+          });
+        }else{
+          setState(() {
+          value = true;                  
+          });
+        }
+
+  }
 
   Widget genderWomanRadio() => Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -723,13 +781,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => firstName = value.trim(),
+                  onChanged: (value) => paramFirstName = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: '$paramId',
+                    labelText: '$paramFirstName',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -748,13 +806,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => lastName = value.trim(),
+                  onChanged: (value) => paramLastName = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: '$paramFirstName',
+                    labelText: '$paramLastName',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -767,7 +825,7 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
   Row groupButton() {
     return Row(
       children: <Widget>[
-        registerButton(),
+        editButton(),
         MyStyle().mySizebox(),
         backButton(),
       ],
@@ -796,7 +854,7 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
         ),
       );
 
-  Widget registerButton() => Container(
+  Widget editButton() => Container(
         width: MediaQuery.of(context).size.width * 0.4,
         height: 48.0,
         child: RaisedButton(
@@ -805,22 +863,24 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
             ),
             color: MyStyle().mainColor,
             onPressed: () {
-              print(
-                  'name = $firstName, lastName= $lastName,password =$password');
-              if (firstName == null || firstName.isEmpty) {
-                print(
-                    //ถ้ากรอกข้อมูลบน textfield ไปแล้วมันจะไม่เป็น null จะเป็น empty แทน
-                    'Have Space');
-                normalDialog(context, 'มีช่องว่างค่ะ กรุณากรอกทุกช่อง');
-                // } else if (chooseType == null) {
-                //   normalDialog(context, 'โปรดเลือกชนิดของผู้สมัคร');
-              } else {
-                registerThread();
-                uploadImage();
-                backDialog(context, 'ลงทะเบียนสำเร็จ', PatientInfo());
-                print('suscess');
-                // registerSuscess();
-              }
+              // print(
+              //     'name = $firstName, lastName= $lastName,password =$password');
+              // if (firstName == null || firstName.isEmpty) {
+              //   print(
+              //       //ถ้ากรอกข้อมูลบน textfield ไปแล้วมันจะไม่เป็น null จะเป็น empty แทน
+              //       'Have Space');
+              //   normalDialog(context, 'มีช่องว่างค่ะ กรุณากรอกทุกช่อง');
+              //   // } else if (chooseType == null) {
+              //   //   normalDialog(context, 'โปรดเลือกชนิดของผู้สมัคร');
+              // } else {
+              //   registerThread();
+              //   uploadImage();
+              //   backDialog(context, 'ลงทะเบียนสำเร็จ', PatientInfo());
+              //   print('suscess');
+              //   registerSuscess();
+                
+              // }
+              updatePatient();
             },
             child: Text(
               'แก้ไข',
@@ -920,13 +980,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => identity = value.trim(),
+                  onChanged: (value) => paramIdentity = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: '$paramLastName',
+                    labelText: '$paramIdentity',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -945,13 +1005,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => dateOfBirth = value.trim(),
+                  onChanged: (value) => paramDateOfBirth = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'วัน / เดือน / ปี ที่เกิด',
+                    labelText: '$paramDateOfBirth',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -970,13 +1030,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => age = value.trim(),
+                  onChanged: (value) => paramAge = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'อายุ',
+                    labelText: '$paramAge',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -995,13 +1055,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => disease = value.trim(),
+                  onChanged: (value) => paramDisease = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'โรคประจำตัว',
+                    labelText: '$paramDisease',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1020,13 +1080,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => career = value.trim(),
+                  onChanged: (value) => paramCareer = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'อาชีพ',
+                    labelText: '$paramCareer',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1045,13 +1105,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => nationality = value.trim(),
+                  onChanged: (value) => paramNationality = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'สัญชาติ',
+                    labelText: '$paramNationality',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1070,13 +1130,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => religion = value.trim(),
+                  onChanged: (value) => paramNationality = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ศาสนา',
+                    labelText: '$paramReligion',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1095,13 +1155,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => bloodGroup = value.trim(),
+                  onChanged: (value) => paramBloodGroup = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'หมู่เลือด',
+                    labelText: '$paramBloodGroup',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1120,13 +1180,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => address = value.trim(),
+                  onChanged: (value) => paramAddress = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ที่อยู่ปัจจุบัน',
+                    labelText: '$paramAddress',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1145,13 +1205,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => tel = value.trim(),
+                  onChanged: (value) => paramTel = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'เบอร์โทรศัพท์',
+                    labelText: '$paramTel',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1170,13 +1230,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => nameOfDad = value.trim(),
+                  onChanged: (value) => paramNameOfDad = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ชื่อ - นามสกุล บิดา',
+                    labelText: '$paramNameOfDad',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1195,13 +1255,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => nameOfMom = value.trim(),
+                  onChanged: (value) => paramNameOfMom = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ชื่อ - นามสกุล มารดา',
+                    labelText: '$paramNameOfMom',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1211,7 +1271,7 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
                   ))),
         ],
       );
-
+//NameEmergency
   Widget emergencyContactForm() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -1220,13 +1280,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => nameEmergency = value.trim(),
+                  onChanged: (value) => paramNameEmergency = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ผู้ติดต่อได้ในกรณีฉุกเฉิน',
+                    labelText: '$paramNameEmergency',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1245,13 +1305,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => addressEmergency = value.trim(),
+                  onChanged: (value) => paramAddressEmergency = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ที่อยู่ผู้ติดต่อได้',
+                    labelText: '$paramAddressEmergency',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1270,13 +1330,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => telEmergency = value.trim(),
+                  onChanged: (value) => paramTelEmergency = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'เบอร์โทรศัพท์ผู้ติดต่อได้กรณีฉุกเฉิน',
+                    labelText: '$paramTelEmergency',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1295,13 +1355,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => etc = value.trim(),
+                  onChanged: (value) => paramEtc = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'อื่นๆโปรดระบุ',
+                    labelText: '$paramEtc',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
@@ -1320,13 +1380,13 @@ class _EditPatientInfoState extends State<EditPatientInfo> {
               width: MediaQuery.of(context).size.width * 0.83,
               height: 48,
               child: TextField(
-                  onChanged: (value) => historyAllergy = value.trim(),
+                  onChanged: (value) => paramHistoryAllergy = value.trim(),
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
                         color: MyStyle().darkColor,
                         fontFamily: 'BaiJamjuree',
                         fontSize: 16),
-                    labelText: 'ชื่อ',
+                    labelText: '$paramHistoryAllergy',
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
