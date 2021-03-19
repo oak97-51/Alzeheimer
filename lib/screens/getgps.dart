@@ -11,7 +11,7 @@ class Getgps extends StatefulWidget {
 }
 
 class _GetgpsState extends State<Getgps> {
-  LatLng _center;
+  LatLng center;
   Position currentLocation;
 
   @override
@@ -54,7 +54,7 @@ class _GetgpsState extends State<Getgps> {
   getUserLocation() async {
     currentLocation = await locateUser();
     setState(() {
-      _center = LatLng(currentLocation.latitude, currentLocation.longitude);
+      center = LatLng(currentLocation.latitude, currentLocation.longitude);
     });
 
     // print('center $_center');

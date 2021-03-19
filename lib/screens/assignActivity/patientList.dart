@@ -142,6 +142,8 @@ class _PatientListState extends State<PatientList> {
                                     paramId: patientFullModels[index].patientId,
                                     paramName:
                                         patientFullModels[index].firstName,
+                                    paramLName:
+                                        patientFullModels[index].lastName,
                                   )); //วิธีเชื่อมหน้า
                           Navigator.push(context, route);
                         }
