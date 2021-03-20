@@ -5,6 +5,7 @@ import 'package:Alzeheimer/data/model_activitybyid.dart';
 import 'package:Alzeheimer/screens/assignActivity/patientList.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:dio/dio.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:Alzeheimer/screens/assignActivity/addDetail.dart';
@@ -280,7 +281,7 @@ class _ScheduleState extends State<Schedule> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           MaterialPageRoute route = MaterialPageRoute(
-                      builder: (value) => AddDetail()); //วิธีเชื่อมหน้า
+                      builder: (value) => AddDetail(paramId: patientByIDModel.patientId,)); //วิธีเชื่อมหน้า
                   Navigator.push(context, route);
         },
         child: Icon(Icons.add),

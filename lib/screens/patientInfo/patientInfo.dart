@@ -49,9 +49,17 @@ class _PatientInfoState extends State<PatientInfo> {
     patientModel = widget.patientModel;
     patientByIDModel2 = widget.patientByIDModel2;
     print("pageload");
+<<<<<<< HEAD
 
     readPatient();
     readPatient2();
+=======
+    
+    //readPatient1 กับ 2 โมเดลคนละตัว 1 ใช้ delete 2 ใช้ edit อนาคตต้องแก้
+    readPatient();
+    readPatient2();
+    
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
   }
 
   @override
@@ -234,20 +242,34 @@ class _PatientInfoState extends State<PatientInfo> {
     print('id = ${patientModel.patientId}');
     print('test_id');
   }
+<<<<<<< HEAD
 
   Future<Null> routeToService(
       Widget myWidget, PatientByIDModel patientByIDModel) async {
+=======
+  
+
+  Future<Null> routeToService(Widget myWidget, PatientByIDModel patientByIDModel) async {
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('PatientId', patientByIDModel.patientId);
     preferences.setString('FirstName', patientByIDModel.firstName);
     preferences.setString('LastName', patientByIDModel.lastName);
 
     MaterialPageRoute route = MaterialPageRoute(
+<<<<<<< HEAD
       builder: (context) => myWidget,
+=======
+      builder: (context) => myWidget, 
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
     );
     Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
   Future<Null> confirmDialog(int index) async {
     showDialog(
       context: context,
@@ -262,6 +284,7 @@ class _PatientInfoState extends State<PatientInfo> {
                   Navigator.pop(context);
                   // editThread();
 
+<<<<<<< HEAD
                   MaterialPageRoute route = MaterialPageRoute(
                       builder: (value) => EditPatientInfo(
                             paramId: patientByIDModels2[index].patientId,
@@ -269,6 +292,20 @@ class _PatientInfoState extends State<PatientInfo> {
                             paramLastName: patientByIDModels2[index].lastName,
                           )); //วิธีเชื่อมหน้า
                   Navigator.push(context, route);
+=======
+
+                  MaterialPageRoute route = MaterialPageRoute(
+                      builder: (value) => EditPatientInfo(paramId: patientByIDModels2[index].patientId,paramFirstName: patientByIDModels2[index].firstName,paramLastName: patientByIDModels2[index].lastName,
+                      paramImg:patientByIDModels2[index].img,paramAge: patientByIDModels2[index].age,paramDisease: patientByIDModels2[index].disease,paramGender: patientByIDModels2[index].gender,
+                      paramIdentity: patientByIDModels2[index].identity,paramDateOfBirth: patientByIDModels2[index].dateOfBirth,paramCareer: patientByIDModels2[index].career,
+                      paramNationality: patientByIDModels2[index].nationality,paramReligion: patientByIDModels2[index].religion,paramBloodGroup: patientByIDModels2[index].bloodGroup,
+                      paramAddress: patientByIDModels2[index].address,paramTel: patientByIDModels2[index].tel,paramNameOfMom:patientByIDModels2[index].nameOfMom,paramNameOfDad: patientByIDModels2[index].nameOfDad,
+                      paramNameEmergency: patientByIDModels2[index].nameEmergency,paramAddressEmergency: patientByIDModels2[index].addressEmergency,paramTelEmergency: patientByIDModels2[index].telEmergency,
+                      paramEtc: patientByIDModels2[index].etc,paramHistoryAllergy: patientByIDModels2[index].historyAllergy,)); //วิธีเชื่อมหน้า
+                  Navigator.push(context, route).then((value) => readPatient2());
+                  //.then((value) => readPatient());
+
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
 
                   // routeToService(EditPatientInfo(),patientByIDModel);
 
@@ -615,7 +652,11 @@ class _PatientInfoState extends State<PatientInfo> {
     Response response = await Dio().get(url); // read data from api
     // print('res ==> $response');
     var result = json.decode(response.data); // ถอดรหัสให้เป็น ภาษาไทย
+<<<<<<< HEAD
     print('result Model 2 = $result');
+=======
+    print('result = $result');
+>>>>>>> 45402bbaf6f816739e66a5de9b90c9ba458f5e07
 
     for (var map in result) {
       patientByIDModel2 = PatientByIDModel2.fromMap(map);
