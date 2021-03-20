@@ -7,6 +7,8 @@ class ActivityByIDModel {
   String drug;
   String status;
   String remark;
+  String total;
+  String size;
 
   ActivityByIDModel({
     this.id,
@@ -17,6 +19,8 @@ class ActivityByIDModel {
     this.drug,
     this.status,
     this.remark,
+    this.total,
+    this.size,
   });
 
   ActivityByIDModel.fromMap(Map<String, dynamic> map) {
@@ -28,6 +32,8 @@ class ActivityByIDModel {
     drug = map['drug'];
     status = map['status'];
     remark = map['remark'];
+    total = map['total'];
+    size = map['size'];
   }
 
   Map<String, dynamic> tomap() {
@@ -40,6 +46,8 @@ class ActivityByIDModel {
     data['drug'] = this.drug;
     data['status'] = this.status;
     data['remark'] = this.remark;
+    data['total'] = this.total;
+    data['size'] = this.size;
 
     return data;
   }
