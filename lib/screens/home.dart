@@ -8,6 +8,7 @@ import 'package:Alzeheimer/screens/getgps.dart';
 import 'package:Alzeheimer/screens/patientInfo/patientInfo.dart';
 import 'package:Alzeheimer/screens/signUp.dart';
 import 'package:Alzeheimer/screens/signin.dart';
+import 'package:Alzeheimer/screens/tracking/patientListTracking.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 // import 'package:dio/dio.dart';
 import 'dart:async';
@@ -190,9 +191,9 @@ class _HomeState extends State<Home> {
 
   Widget trackingPatient() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         MaterialPageRoute route = MaterialPageRoute(
-            builder: (value) => UploadImageDemo()); //วิธีเชื่อมหน้า
+            builder: (value) => PatientListTracking()); //วิธีเชื่อมหน้า
         Navigator.push(context, route);
       },
       child: Container(

@@ -264,8 +264,10 @@ class _Home2State extends State<Home2> {
         ),
       ),
       onTap: () {
-        MaterialPageRoute route =
-            MaterialPageRoute(builder: (value) => Getgps2()); //วิธีเชื่อมหน้า
+        MaterialPageRoute route = MaterialPageRoute(
+            builder: (value) => Getgps2(
+                  paramId: idp,
+                )); //วิธีเชื่อมหน้า
         Navigator.push(context, route);
       },
     );
