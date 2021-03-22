@@ -5,8 +5,10 @@ import 'package:Alzeheimer/data/model_activitybyid.dart';
 import 'package:Alzeheimer/screens/assignActivity/patientList.dart';
 import 'package:Alzeheimer/utility/my_style.dart';
 import 'package:dio/dio.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:Alzeheimer/screens/assignActivity/addDetail.dart';
 // import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:intl/date_symbol_data_local.dart';
 
@@ -142,7 +144,7 @@ class _ScheduleState extends State<Schedule> {
             MyStyle().mySizebox(),
             Container(
               decoration: new BoxDecoration(
-                color: Colors.grey,
+                color: Colors.white,
                 borderRadius: new BorderRadius.circular(10.0),
               ),
               height: MediaQuery.of(context).size.height * 0.2,
@@ -277,7 +279,11 @@ class _ScheduleState extends State<Schedule> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          MaterialPageRoute route = MaterialPageRoute(
+                      builder: (value) => AddDetail(paramId: patientByIDModel.patientId,)); //วิธีเชื่อมหน้า
+                  Navigator.push(context, route);
+        },
         child: Icon(Icons.add),
       ),
     );

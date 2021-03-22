@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
   //1080 x 1920 420dpi
 
   @override
-  void initState() {
+  void initState() { 
     super.initState();
     userPreferences();
   }
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
       img = preferences.getString('Img');
       email = preferences.getString('Email');
       status = preferences.getString('status');
-      print('Nameuser = $nameUser');
+      print('Nameuser = $firstName');
       print('Nameuser = $nameUser2');
       print('Gender = $gender');
     });
